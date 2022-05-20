@@ -33,3 +33,36 @@ dados::dados_starwars |> skim()
 info_skim <- dados::dados_starwars |> 
   skim() |> 
   tibble::as_tibble()
+
+### Podemos, por exemplo, ordenar pelas variáveis que tem maior número de NA:
+
+info_skim |> 
+  dplyr::arrange(desc(n_missing))
+
+# Outros modos de uso do pacote ------------------------------------------------------------------------------------------------------------
+
+### By design, the main focus of skimr is on data frames; it is intended to fit well 
+### within a data pipeline and relies extensively on tidyverse vocabulary, which focuses 
+### on data frames.
+
+skim(iris) %>%
+  dplyr::filter(skim_variable == "Petal.Length") %>%
+  tibble::as_tibble() %>%
+  View()
+
+skim(iris) %>%
+  dplyr::select(skim_type, skim_variable, n_missing)
+
+skim(iris) %>%
+  dplyr::select(skim_type, skim_variable, numeric.mean) # Média das variáveis
+
+iris %>%
+  dplyr::group_by(Species) %>% # Informações de todas as variáveis para cada espécie
+  skim()
+
+s <- skim(iris, Sepal.Length, Species) # Informações de apenas uma variável para cada 
+# espécie
+View(s)
+
+skim(iris, starts_with("Sepal")) %>%
+  View()
