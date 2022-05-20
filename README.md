@@ -5,7 +5,7 @@
 #### Data: 19/05/22 
 #### Referência: Curso-R
 
-## Tópicos do script
+# Tópicos do script
 
 1. Baixar pacote;
 2. Aplicando o pacote em uma base de dados;
